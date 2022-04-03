@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const PasswordReset = () => {
     const router = useRouter()
@@ -22,6 +23,7 @@ const PasswordReset = () => {
     const [password_confirmation, setPasswordConfirmation] = useState('')
     const [errors, setErrors] = useState([])
     const [status, setStatus] = useState(null)
+    const [submitted, setSubmitted] = useState(false)
 
     const submitForm = event => {
         event.preventDefault()
@@ -32,6 +34,7 @@ const PasswordReset = () => {
             password_confirmation,
             setErrors,
             setStatus,
+            setSubmitted
         })
     }
 
@@ -65,10 +68,11 @@ const PasswordReset = () => {
                             id="email"
                             type="email"
                             value={email}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event => setEmail(event.target.value)}
                             required
                             autoFocus
+                            disabled={true}
                         />
                     </div>
 
@@ -79,9 +83,10 @@ const PasswordReset = () => {
                             id="password"
                             type="password"
                             value={password}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event => setPassword(event.target.value)}
                             required
+                            disabled={submitted}
                         />
                     </div>
 
@@ -95,16 +100,17 @@ const PasswordReset = () => {
                             id="password_confirmation"
                             type="password"
                             value={password_confirmation}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event =>
                                 setPasswordConfirmation(event.target.value)
                             }
                             required
+                            disabled={submitted}
                         />
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Button>Reset Password</Button>
+                        <Button disabled={submitted}><ClipLoader color={"#ffffff"} loading={submitted} size={15} css={{marginRight: "6px"}} /> Reset Password</Button>
                     </div>
                 </form>
             </AuthCard>

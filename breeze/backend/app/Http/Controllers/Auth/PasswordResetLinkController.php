@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Auth\Events\Lockout;
 
 class PasswordResetLinkController extends Controller
 {
@@ -22,7 +23,7 @@ class PasswordResetLinkController extends Controller
     {
         $this->ensureIsNotRateLimited();
         RateLimiter::hit($this->throttleKey());
-        
+
         $request->validate([
             'email' => ['required', 'email'],
         ]);
@@ -50,16 +51,30 @@ class PasswordResetLinkController extends Controller
             return;
         }
 
-        event(new Lockout($this));
+        // event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'email' => trans('auth.throttle2', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
         ]);
+    }
+
+    public function getIp(){
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+            if (array_key_exists($key, $_SERVER) === true){
+                foreach (explode(',', $_SERVER[$key]) as $ip){
+                    $ip = trim($ip); // just to be safe
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                        return $ip;
+                    }
+                }
+            }
+        }
+        return Request()->ip(); // it will return server ip when no client ip found
     }
 
     /**
@@ -69,6 +84,6 @@ class PasswordResetLinkController extends Controller
      */
     public function throttleKey()
     {
-        return $this->ip();
+        return $this->getIp();
     }
 }

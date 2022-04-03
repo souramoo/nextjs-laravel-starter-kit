@@ -73,7 +73,7 @@ const Login = () => {
                             id="email"
                             type="email"
                             value={email}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event => setEmail(event.target.value)}
                             required
                             autoFocus
@@ -89,7 +89,7 @@ const Login = () => {
                             id="password"
                             type="password"
                             value={password}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event => setPassword(event.target.value)}
                             required
                             autoComplete="current-password"
@@ -106,7 +106,7 @@ const Login = () => {
                                 id="remember_me"
                                 type="checkbox"
                                 name="remember"
-                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:opacity-50"
                                 disabled={submitted}
                             />
 

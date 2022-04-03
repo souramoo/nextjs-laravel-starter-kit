@@ -61,7 +61,7 @@ const Register = () => {
                             id="name"
                             type="text"
                             value={name}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event => setName(event.target.value)}
                             required
                             autoFocus
@@ -77,7 +77,7 @@ const Register = () => {
                             id="email"
                             type="email"
                             value={email}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event => setEmail(event.target.value)}
                             required
                             disabled={submitted}
@@ -92,7 +92,7 @@ const Register = () => {
                             id="password"
                             type="password"
                             value={password}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event => setPassword(event.target.value)}
                             required
                             autoComplete="new-password"
@@ -110,7 +110,7 @@ const Register = () => {
                             id="password_confirmation"
                             type="password"
                             value={password_confirmation}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full disabled:opacity-50"
                             onChange={event =>
                                 setPasswordConfirmation(event.target.value)
                             }
