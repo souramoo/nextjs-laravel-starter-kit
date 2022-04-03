@@ -1,1 +1,1 @@
-# interview-app
+# NextJS and Laravel starter kit
