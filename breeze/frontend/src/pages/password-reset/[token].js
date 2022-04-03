@@ -40,7 +40,7 @@ const PasswordReset = () => {
     }, [router.query.email])
 
     return (
-        <GuestLayout>
+        <GuestLayout auth={auth}>
             <AuthCard
                 logo={
                     <Link href="/">

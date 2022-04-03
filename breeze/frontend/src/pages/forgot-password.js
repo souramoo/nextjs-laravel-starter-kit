@@ -9,6 +9,7 @@ import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const ForgotPassword = () => {
     const auth = useAuth({ middleware: 'guest' })
@@ -69,11 +70,12 @@ const ForgotPassword = () => {
                             onChange={event => setEmail(event.target.value)}
                             required
                             autoFocus
+                            disabled={submitted}
                         />
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Button>Email Password Reset Link</Button>
+                        <Button disabled={submitted}><ClipLoader color={"#ffffff"} loading={submitted} size={15} css={{marginRight: "6px"}} /> Email Password Reset Link</Button>
                     </div>
                     
                     <div className="flex items-center justify-end mt-4">
