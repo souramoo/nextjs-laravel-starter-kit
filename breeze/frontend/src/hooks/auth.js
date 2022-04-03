@@ -119,7 +119,6 @@ export const useAuth = ({ middleware } = {}) => {
         } else {
             if(user)
                 setIsLoadingPage(false)
-            console.log(user, middleware)
         }
     }, [user, error])
 

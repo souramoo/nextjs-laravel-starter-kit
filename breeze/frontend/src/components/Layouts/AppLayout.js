@@ -12,7 +12,7 @@ const defaultPropsLoader  = {
       height: '3em',
       color: '#a0aaae'
     },
-    wrapperBackgroundColor: 'white', // any valid CSS background string works (gradients here!)
+    wrapperBackgroundColor: 'rgb(243 244 246)', // any valid CSS background string works (gradients here!)
     counter: false, // We are going to show the counter below the text
     counterMax: 5, // Stop after 5 cycles
     counterDelay: 3000, // A cycle length in milliseconds

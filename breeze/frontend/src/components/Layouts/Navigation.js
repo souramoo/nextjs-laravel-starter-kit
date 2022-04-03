@@ -16,7 +16,7 @@ const Navigation = ({ user }) => {
     const [open, setOpen] = useState(false)
 
     return (
-        <nav className="bg-white border-b border-gray-100">
+        <nav className="bg-gray border-b border-gray-100">
             {/* Primary Navigation Menu */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
@@ -64,6 +64,12 @@ const Navigation = ({ user }) => {
                                 </button>
                             }>
 
+                            {/* Button linking to settings page */}
+                            <DropdownButton
+                                onClick={() => {router.push("/settings")}}>
+                                Settings
+                            </DropdownButton>
+
                             {/* Authentication */}
                             <DropdownButton onClick={logout}>
                                 Logout
@@ -107,17 +113,8 @@ const Navigation = ({ user }) => {
             {/* Responsive Navigation Menu */}
             {open && (
                 <div className="block sm:hidden">
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/launch"
-                            active={router.pathname === '/launch'}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    {/* Responsive Settings Options */}
-                    <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="flex items-center px-4">
+                    
+                    <div className="flex items-center px-4">
                             <div className="flex-shrink-0">
                                 <svg
                                     className="h-10 w-10 fill-current text-gray-400"
@@ -144,7 +141,25 @@ const Navigation = ({ user }) => {
                             </div>
                         </div>
 
-                        <div className="mt-3 space-y-1">
+                    <div className="pt-2 space-y-1">
+                        <ResponsiveNavLink
+                            href="/launch"
+                            active={router.pathname === '/launch'}>
+                            Dashboard
+                        </ResponsiveNavLink>
+                    </div>
+
+                    {/* Responsive Settings Options */}
+                    <div className="pt-0 pb-1 border-t border-gray-200">
+
+                        <div className="mt-3">
+                            <ResponsiveNavLink
+                            href="/settings"
+                            active={router.pathname === '/settings'}>
+                                    Settings
+                            </ResponsiveNavLink>
+                        </div>
+                        <div className="mt-1 space-y-1">
                             {/* Authentication */}
                             <ResponsiveNavButton onClick={logout}>
                                 Logout
